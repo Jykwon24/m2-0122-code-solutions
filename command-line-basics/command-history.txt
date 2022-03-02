@@ -1,0 +1,216 @@
+    1  exit
+    2  whoami
+    3  git config --global user.name "Jeff Kwon"
+    4  git config --global user.email "jykwon007@gmail.com"
+    5  git config --global --list
+    6  exit
+    7  cd ~/repos
+    8  git clone git@github.com:Jykwon24/m2-0122-code-solutions.git
+    9  ls
+   10  exit
+   11  npm ci
+   12  exit
+   13  cd ~/repos/ajax-project/
+   14  git status
+   15  git push origin issue-4-view-favorites 
+   16  git status
+   17  git add css/layout.css 
+   18  git add js/main.js 
+   19  git commit -m "Tasks 6-8, added touch styling to favorites list, added additional class info to each listed recipe for future functionality to delete and show recipe."
+   20  git push origin issue-4-view-favorites 
+   21  git status
+   22  git switch master
+   23  git pull origin master
+   24  git status
+   25  git branch issue-5-edit-favorites
+   26  git branch --l
+   27  git switch issue-5-edit-favorites 
+   28  git status
+   29  git add css/layout.css 
+   30  git add css/styles.css 
+   31  git add index.html 
+   32  git add js/main.js 
+   33  git status
+   34  git commit -m "Tasks1, 3-5 added icon for deleting, created first draft of the modal confirming the action."
+   35  git push origin issue-5-edit-favorites 
+   36  git status
+   37  git add css/layout.css 
+   38  git add css/styles.css 
+   39  git add index.html
+   40  git status
+   41  git commit -m "Additional styling on the modal display."
+   42  git push origin issue-5-edit-favorites 
+   43  cd ~/repos/driving-game/
+   44  git branch --l
+   45  git branch issue-6-OOP-implementation
+   46  git switch issue-6-OOP-implementation 
+   47  git status
+   48  cd ~/repos/ajax-project/
+   49  git status
+   50  git commit -m "Completed viewing the receip from favorites list, need to implement delete."
+   51  git status
+   52  git add index.html 
+   53  git add js/main.js 
+   54  git status
+   55  git commit -m "Completed viewing recipe from favorites list, need to implement deleting."
+   56  git status
+   57  git add js/main.js 
+   58  git status
+   59  git commit -m "Completed viewing recipe from favorites list, need to implement deleting."
+   60  git push origin issue-5-edit-favorites 
+   61  git status
+   62  git add css/layout.css 
+   63  git add index.html 
+   64  git add js/main.js 
+   65  git status
+   66  git commit -m "added button to go back to favorites, need to implement functionality."
+   67  git push origin issue-5-edit-favorites 
+   68  git status
+   69  cd ~/repos/m2-0122-code-solutions/
+   70  git branch es6-const-let
+   71  git status
+   72  git branch --l
+   73  git swtich es6-const-let
+   74  git switch es6-const-let 
+   75  git status
+   76  git add es6-const-let/
+   77  git status
+   78  git commit -m "Completed es6-const-let exercise."
+   79  git push origin es6-const-let 
+   80  git status
+   81  git add es6-const-let/index.html 
+   82  git status
+   83  git commit -m "Corrected error for variable meow."
+   84  git push origin es6-const-let 
+   85  git switch master
+   86  git pull origin master
+   87  git status
+   88  git branch es6-template-literals
+   89  git switch es6-template-literals 
+   90  git status
+   91  git add es6-template-literals/
+   92  git status
+   93  git commit -m "Completed es6-template-literals."
+   94  git push origin es6-template-literals 
+   95  git status
+   96  git add es6-template-literals/index.html 
+   97  git commit -m "Corrected missing concatentations."
+   98  git push origin es6-template-literals 
+   99  git status
+  100  git add es6-template-literals/index.html 
+  101  git commit -m "Fixed error for applePen spacing."
+  102  git push origin es6-template-literals 
+  103  git add es6-template-literals/index.html 
+  104  git commit -m "Fixed address spacing.'
+git status
+cd ~/repos/m2-0122-code-solutions/es6-template-literals/
+
+git status
+
+  105  git status
+  106  git commit -m "fixed address variable spacing."
+  107  git push origin es6-template-literals 
+  108  git switch master
+  109  git pull origin master
+  110  git branch es6-destructuring
+  111  git switch es6-destructuring 
+  112  git status
+  113  git add es6-destructuring/
+  114  git commit -m "Completed es6-destructuring exercise."
+  115  git push origin es6-destructuring 
+  116  git switch master
+  117  git branch es6-arrow-functions
+  118  git switch es6-arrow-functions 
+  119  git status
+  120  git add es6-arrow-functions/
+  121  git commit -m "Completed es6-arrow-functions exercise."
+  122  git push origin es6-arrow-functions 
+  123  git switch master
+  124  git branch command-line-basics
+  125  git switch command-line-basics 
+  126  cd command-line-basics
+  127  pwd
+  128  git switch master
+  129  cd command-line-basics
+  130  git switch command-line-basics 
+  131  cd command-line-basics
+  132  pwd
+  133  cd command-line-basics
+  134  pwed
+  135  pwd
+  136  man man
+  137  man
+  138  man cat
+  139  cat laziness.txt
+  140  cat impatience.txt
+  141  cat hubris.txt
+  142  cat laziness.txt impatience.txt hubris.txt > three-virtues.txt
+  143  cat three-virtues.txt 
+  144  man ls
+  145  ls
+  146  ls -a
+  147  man ls
+  148  ls -F
+  149  man ls
+  150  ls lfz-staff/
+  151  ls lfz-staff/ -a
+  152  ls lfz-staff/ -F
+  153  ls -a lfz-staff/
+  154  ls -aF lfz-staff/
+  155  man ls
+  156  ls -aF lfz-staff/ > lfz-staff/contents.txt
+  157  cat lfz-staff/contents.txt 
+  158  man pwd
+  159  pwd
+  160  pwd > i-was-here.txt
+  161  ls pwd
+  162  ls
+  163  cat i-was-here.txt 
+  164  man ls
+  165  man cat
+  166  man echo
+  167  echo 'Hello, World!'
+  168  echo 'Hello, World!' > hello.txt
+  169  ls
+  170  cat hello.txt 
+  171  man touch
+  172  touch tag-youre-it.txt
+  173  ls
+  174  man touch
+  175  touch snoot/boop.txt
+  176  ls snoot/
+  177  man mkdir
+  178  mkdir parent
+  179  ls
+  180  man mkdir
+  181  mkdir -p parent/child/grandchild
+  182  touch parent/child/grandchild/.gitkeep
+  183  ls -a
+  184  ls -a parent/child/grandchild/
+  185  ls parent/
+  186  ls child
+  187  ls child/
+  188  ls parent
+  189  ls parent/child
+  190  ls parent/child/grandchild/
+  191  man mv
+  192  mv pokiemans pokemon
+  193  ls
+  194  ls pokemon
+  195  man mv
+  196  ls
+  197  man rm
+  198  rm lol.txt
+  199  ls
+  200  rm -r kill-me/
+  201  ls
+  202  man rm
+  203  man cp
+  204  ls
+  205  cp and-then.txt no-and-then.txt
+  206  ls
+  207  cat and-then.txt 
+  208  cat no-and-then.txt 
+  209  man history
+  210  history
+  211  history > command-history.txt
