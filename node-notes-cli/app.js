@@ -17,8 +17,12 @@ if (key === 'read') {
   fs.writeFile('./data.json', newDataJSON, err => {
     if (err) throw err;
   });
-} else if (key === 'update' && !isNaN(keyValue)) {
-  dataList.notes[newValue] = updateValue;
+} else if (key === 'update') {
+  for (const prop in dataList.notes) {
+    if (newValue === prop) {
+      dataList.notes[newValue] = updateValue;
+    }
+  }
   const newDataJSON = JSON.stringify(dataList, null, 2);
   fs.writeFile('./data.json', newDataJSON, err => {
     if (err) throw err;
