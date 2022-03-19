@@ -22,10 +22,6 @@ const grades = {
   }
 };
 
-app.listen(3000, () => {
-
-});
-
 app.get('/api/grades', (req, res) => {
   const arr = [];
   for (const key in grades) {
@@ -36,6 +32,14 @@ app.get('/api/grades', (req, res) => {
 
 app.delete('/api/grades/:id', (req, res) => {
   const iD = req.params.id;
-  delete grades[iD];
-  res.sendStatus(204);
+  if (!grades[iD]) {
+    res.sendStatus(404);
+  } else {
+    delete grades[iD];
+    res.sendStatus(204);
+  }
+});
+
+app.listen(3000, () => {
+
 });
