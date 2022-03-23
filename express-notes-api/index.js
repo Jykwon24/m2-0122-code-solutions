@@ -38,7 +38,6 @@ app.post('/api/notes', (req, res) => {
     res.status(400).send({ error: 'content is a required field' });
   } else if (postBody.content) {
     postBody.id = iD;
-    dataArray.push(postBody);
     data.notes[iD] = postBody;
     data.nextId++;
     const newDataJSON = JSON.stringify(data, null, 2);
@@ -68,6 +67,30 @@ app.delete('/api/notes/:id', (req, res) => {
         res.status(500).send({ error: 'An unexpected error occured.' });
       } else {
         res.sendStatus(204);
+      }
+    });
+  }
+});
+
+app.put('/api/notes/:id', (req, res) => {
+  const iD = req.params.id;
+  const putBody = req.body;
+  if (isNaN(parseInt(iD))) {
+    res.status(400).send({ error: 'id must be a postive integer' });
+  } else if (!putBody.content) {
+    res.status(400).send({ error: 'content is a required field' });
+  } else if (!data.notes[iD]) {
+    res.status(404).send({ error: `cannot find note with id ${iD}` });
+  } else if (data.notes[iD]) {
+    putBody.id = iD;
+    data.notes[iD] = putBody;
+    const newDataJSON = JSON.stringify(data, null, 2);
+    fs.writeFile('./data.json', newDataJSON, err => {
+      if (err) {
+        console.error(err);
+        res.status(500).send({ error: 'An unexpected error occured.' });
+      } else {
+        res.status(200).send(putBody);
       }
     });
   }
