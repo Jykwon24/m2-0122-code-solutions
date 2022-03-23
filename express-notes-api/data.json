@@ -1,5 +1,5 @@
 {
-  "nextId": 12,
+  "nextId": 13,
   "notes": {
     "2": {
       "id": 2,
@@ -24,6 +24,10 @@
     "11": {
       "content": "Node does not have a window or document object.",
       "id": 11
+    },
+    "12": {
+      "content": "NPM is the worlds's largest open source software registry for developers.",
+      "id": 12
     }
   }
 }
