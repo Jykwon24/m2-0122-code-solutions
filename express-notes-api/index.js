@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+const fs = require('fs');
 
 const jsonMethod = express.json();
 app.use(jsonMethod);
 
 const data = require('./data.json');
 const dataArray = [];
+
 app.get('/api/notes', (req, res) => {
   for (const key in data.notes) {
     if (!data.notes[key]) {
@@ -27,8 +29,25 @@ app.get('/api/notes/:id', (req, res) => {
     res.status(404).send({ error: `cannot find note with id ${iD}` });
   }
 }
-
 );
+
+app.post('/api/notes', (req, res) => {
+  const postBody = req.body;
+  const iD = data.nextId;
+  if (!postBody.content) {
+    res.status(400).send({ error: 'content is a required field' });
+  } else if (postBody.content) {
+    postBody.id = iD;
+    dataArray.push(postBody);
+    data.notes[iD] = postBody;
+    data.nextId++;
+    const newDataJSON = JSON.stringify(data, null, 2);
+    fs.writeFile('./data.json', newDataJSON, err => {
+      if (err) throw err;
+    });
+    res.status(201).send(postBody);
+  }
+});
 
 app.listen('3000', () => {
   // eslint-disable-next-line no-console
