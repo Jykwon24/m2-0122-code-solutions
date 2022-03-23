@@ -17,10 +17,6 @@
       "id": 9,
       "content": "Inertia is a property of matter."
     },
-    "10": {
-      "content": "Arrow functions are lexical scoped, while regular functions are dynamic scoped.",
-      "id": 10
-    },
     "11": {
       "content": "Node does not have a window or document object.",
       "id": 11
