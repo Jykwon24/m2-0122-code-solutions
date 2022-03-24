@@ -6,9 +6,9 @@ const jsonMethod = express.json();
 app.use(jsonMethod);
 
 const data = require('./data.json');
-const dataArray = [];
 
 app.get('/api/notes', (req, res) => {
+  const dataArray = [];
   for (const key in data.notes) {
     if (!data.notes[key]) {
       res.status(200).json(dataArray);
@@ -21,7 +21,7 @@ app.get('/api/notes', (req, res) => {
 
 app.get('/api/notes/:id', (req, res) => {
   const iD = req.params.id;
-  if (isNaN(parseInt(iD))) {
+  if ((Math.sign(iD) === -1) || (!Number.isInteger(parseInt(iD)))) {
     res.status(400).send({ error: 'id must be a positive integer' });
   } else if (data.notes[iD]) {
     res.status(200).send(data.notes[iD]);
@@ -82,7 +82,7 @@ app.put('/api/notes/:id', (req, res) => {
   } else if (!data.notes[iD]) {
     res.status(404).send({ error: `cannot find note with id ${iD}` });
   } else if (data.notes[iD]) {
-    putBody.id = iD;
+    putBody.id = parseInt(iD);
     data.notes[iD] = putBody;
     const newDataJSON = JSON.stringify(data, null, 2);
     fs.writeFile('./data.json', newDataJSON, err => {

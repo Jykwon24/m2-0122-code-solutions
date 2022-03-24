@@ -1,5 +1,5 @@
 {
-  "nextId": 14,
+  "nextId": 15,
   "notes": {
     "2": {
       "id": 2,
@@ -18,8 +18,8 @@
       "content": "Inertia is a property of matter."
     },
     "11": {
-      "content": "Updated content.",
-      "id": "11"
+      "content": "updated field.",
+      "id": 11
     },
     "12": {
       "content": "NPM is the worlds's largest open source software registry for developers.",
@@ -28,6 +28,10 @@
     "13": {
       "content": "Arrow functions are lexical scoped, while regular functions are dynamic scoped.",
       "id": 13
+    },
+    "14": {
+      "content": "Checking iD number.",
+      "id": 14
     }
   }
 }
