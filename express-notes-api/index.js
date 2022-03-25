@@ -10,9 +10,7 @@ const data = require('./data.json');
 app.get('/api/notes', (req, res) => {
   const dataArray = [];
   for (const key in data.notes) {
-    if (!data.notes[key]) {
-      res.status(200).json(dataArray);
-    } else {
+    if (data.notes[key]) {
       dataArray.push(data.notes[key]);
     }
   }
@@ -21,13 +19,13 @@ app.get('/api/notes', (req, res) => {
 
 app.get('/api/notes/:id', (req, res) => {
   const iD = req.params.id;
-  if ((Math.sign(iD) === -1) || (!Number.isInteger(parseInt(iD)))) {
-    res.status(400).send({ error: 'id must be a positive integer' });
-  } else if (data.notes[iD]) {
-    res.status(200).send(data.notes[iD]);
-  } else if (!data.notes[iD]) {
+  if (data.notes[iD]) {
+    if ((Math.sign(iD) === 1) && Number.isInteger(parseInt(iD)) && iD !== '0') {
+      res.status(200).send(data.notes[iD]);
+    }
     res.status(404).send({ error: `cannot find note with id ${iD}` });
   }
+  res.status(400).send({ error: 'id must be a positive integer' });
 }
 );
 
