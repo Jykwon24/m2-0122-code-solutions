@@ -77,24 +77,28 @@ app.delete('/api/notes/:id', (req, res) => {
 app.put('/api/notes/:id', (req, res) => {
   const iD = req.params.id;
   const putBody = req.body;
-  if (isNaN(parseInt(iD))) {
-    res.status(400).send({ error: 'id must be a postive integer' });
-  } else if (!putBody.content) {
+  if (!putBody.content) {
     res.status(400).send({ error: 'content is a required field' });
-  } else if (!data.notes[iD]) {
-    res.status(404).send({ error: `cannot find note with id ${iD}` });
-  } else if (data.notes[iD]) {
-    putBody.id = parseInt(iD);
-    data.notes[iD] = putBody;
-    const newDataJSON = JSON.stringify(data, null, 2);
-    fs.writeFile('./data.json', newDataJSON, err => {
-      if (err) {
-        console.error(err);
-        res.status(500).send({ error: 'An unexpected error occured.' });
+  } else {
+    if (iD > 0 && Number.isInteger(Number(iD))) {
+      if (data.notes[iD]) {
+        putBody.id = parseInt(iD);
+        data.notes[iD] = putBody;
+        const newDataJSON = JSON.stringify(data, null, 2);
+        fs.writeFile('./data.json', newDataJSON, err => {
+          if (err) {
+            console.error(err);
+            res.status(500).send({ error: 'An unexpected error occured.' });
+          } else {
+            res.status(200).send(putBody);
+          }
+        });
       } else {
-        res.status(200).send(putBody);
+        res.status(404).send({ error: `cannot find note with id ${iD}` });
       }
-    });
+    } else {
+      res.status(400).send({ error: 'id must be a postive integer' });
+    }
   }
 });
 
