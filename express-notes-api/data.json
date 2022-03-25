@@ -1,0 +1,33 @@
+{
+  "nextId": 15,
+  "notes": {
+    "5": {
+      "id": 5,
+      "content": "In JavaScript, the value of `this` is determined when a function is called; not when it is defined."
+    },
+    "6": {
+      "id": 6,
+      "content": "A closure is formed when a function retains access to variables in its lexical scope."
+    },
+    "9": {
+      "id": 9,
+      "content": "Inertia is a property of matter."
+    },
+    "11": {
+      "content": "updated field.",
+      "id": 11
+    },
+    "12": {
+      "content": "NPM is the worlds's largest open source software registry for developers.",
+      "id": 12
+    },
+    "13": {
+      "content": "content.",
+      "id": 13
+    },
+    "14": {
+      "content": "Checking iD number.",
+      "id": 14
+    }
+  }
+}
