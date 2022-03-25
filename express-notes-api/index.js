@@ -19,13 +19,15 @@ app.get('/api/notes', (req, res) => {
 
 app.get('/api/notes/:id', (req, res) => {
   const iD = req.params.id;
-  if (data.notes[iD]) {
-    if ((Math.sign(iD) === 1) && Number.isInteger(parseInt(iD)) && iD !== '0') {
+  if (iD > 0 && Number.isInteger(Number(iD))) {
+    if (data.notes[iD]) {
       res.status(200).send(data.notes[iD]);
+    } else {
+      res.status(404).send({ error: `cannot find note with id ${iD}` });
     }
-    res.status(404).send({ error: `cannot find note with id ${iD}` });
+  } else {
+    res.status(400).send({ error: 'id must be a positive integer' });
   }
-  res.status(400).send({ error: 'id must be a positive integer' });
 }
 );
 
@@ -52,21 +54,23 @@ app.post('/api/notes', (req, res) => {
 
 app.delete('/api/notes/:id', (req, res) => {
   const iD = req.params.id;
-  if (isNaN(parseInt(iD))) {
+  if (iD > 0 && Number.isInteger(Number(iD))) {
+    if (data.notes[iD]) {
+      delete data.notes[parseInt(iD)];
+      const newDataJSON = JSON.stringify(data, null, 2);
+      fs.writeFile('./data.json', newDataJSON, err => {
+        if (err) {
+          console.error(err);
+          res.status(500).send({ error: 'An unexpected error occured.' });
+        } else {
+          res.sendStatus(204);
+        }
+      });
+    } else {
+      res.status(404).send({ error: `cannot find note with id ${iD}` });
+    }
+  } else {
     res.status(400).send({ error: 'id must be a positive integer' });
-  } else if (!data.notes[iD]) {
-    res.status(404).send({ error: `cannot find note with id ${iD}` });
-  } else if (data.notes[iD]) {
-    delete data.notes[parseInt(iD)];
-    const newDataJSON = JSON.stringify(data, null, 2);
-    fs.writeFile('./data.json', newDataJSON, err => {
-      if (err) {
-        console.error(err);
-        res.status(500).send({ error: 'An unexpected error occured.' });
-      } else {
-        res.sendStatus(204);
-      }
-    });
   }
 });
 
