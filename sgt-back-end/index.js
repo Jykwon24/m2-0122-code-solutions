@@ -35,6 +35,36 @@ app.get('/api/grades', (req, res) => {
     });
 });
 
+app.post('/api/grades', (req, res) => {
+  const postBody = req.body;
+  const sql = `
+  INSERT INTO "grades" ("name", "course", "score")
+  VALUES ('${postBody.name}', '${postBody.course}', '${postBody.score}')
+  RETURNING *`;
+  if (!postBody.name || !postBody.course || !postBody.score) {
+    res.status(400).json({
+      error: 'Must have a name, course and score field'
+    });
+  } else {
+    if (postBody.score > 0 && postBody.score <= 100 && Number.isInteger(Number(postBody.score))) {
+      db.query(sql)
+        .then(result => {
+          res.status(201).json(postBody);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500).json({
+            error: 'An unexpected error ocurred.'
+          });
+        });
+    } else {
+      res.status(400).json({
+        error: 'score needs to be an integer from 0 to 100'
+      });
+    }
+  }
+});
+
 app.listen('3000', () => {
   // eslint-disable-next-line no-console
   console.log('listening on port 3000');
