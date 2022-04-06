@@ -38,9 +38,9 @@ app.get('/api/grades', (req, res) => {
 app.post('/api/grades', (req, res) => {
   const postBody = req.body;
   const sql = `
-  INSERT INTO "grades" ("name", "course", "score")
-  VALUES ('${postBody.name}', '${postBody.course}', '${postBody.score}')
-  RETURNING *`;
+    INSERT INTO "grades" ("name", "course", "score")
+    VALUES ('${postBody.name}', '${postBody.course}', '${postBody.score}')
+    RETURNING *;`;
   if (!postBody.name || !postBody.course || !postBody.score) {
     res.status(400).json({
       error: 'Must have a name, course and score field'
@@ -49,7 +49,7 @@ app.post('/api/grades', (req, res) => {
     if (postBody.score > 0 && postBody.score <= 100 && Number.isInteger(Number(postBody.score))) {
       db.query(sql)
         .then(result => {
-          res.status(201).json(postBody);
+          res.status(201).json(result.rows);
         })
         .catch(err => {
           console.error(err);
