@@ -65,6 +65,42 @@ app.post('/api/grades', (req, res) => {
   }
 });
 
+app.put('/api/grades/:gradeId', (req, res) => {
+  const gradeId = Number(req.params.gradeId);
+  const putBody = req.body;
+  if (!Number.isInteger(gradeId) || gradeId <= 0 || !putBody.name || !putBody.course || !putBody.score) {
+    res.status(400).json({
+      error: 'Invalid gradeId or missing name, course or score field'
+    });
+    return;
+  }
+  const sql = `
+  UPDATE "grades"
+  SET "name" = '${putBody.name}',
+      "course" = '${putBody.course}',
+      "score" = '${putBody.score}'
+  WHERE "gradeId" = '${gradeId}'
+  RETURNING *;
+  `;
+  db.query(sql)
+    .then(result => {
+      const gradesArray = result.rows[0];
+      if (!gradesArray) {
+        res.status(404).json({
+          error: `Cannot find grade with gradeId ${gradeId}`
+        });
+      } else {
+        res.status(200).json(result.rows);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occured'
+      });
+    });
+});
+
 app.listen('3000', () => {
   // eslint-disable-next-line no-console
   console.log('listening on port 3000');
