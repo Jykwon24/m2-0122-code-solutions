@@ -101,6 +101,37 @@ app.put('/api/grades/:gradeId', (req, res) => {
     });
 });
 
+app.delete('/api/grades/:gradeId', (req, res) => {
+  const gradeId = Number(req.params.gradeId);
+  if (!Number.isInteger(gradeId) || gradeId <= 0) {
+    res.status(400).json({
+      error: 'Invalid gradeId cannot delete'
+    });
+    return;
+  }
+  const sql = `
+  DELETE FROM "grades"
+  WHERE "gradeId" = ${gradeId}
+  RETURNING *`;
+  db.query(sql)
+    .then(result => {
+      const gradesArray = result.rows[0];
+      if (!gradesArray) {
+        res.status(404).json({
+          error: `Cannot find grade with gradeId ${gradeId}`
+        });
+      } else {
+        res.status(200).json(result.rows);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An unexpected error occured'
+      });
+    });
+});
+
 app.listen('3000', () => {
   // eslint-disable-next-line no-console
   console.log('listening on port 3000');
