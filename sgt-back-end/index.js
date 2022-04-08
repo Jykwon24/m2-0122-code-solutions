@@ -39,15 +39,16 @@ app.post('/api/grades', (req, res) => {
   const postBody = req.body;
   const sql = `
     INSERT INTO "grades" ("name", "course", "score")
-    VALUES ('${postBody.name}', '${postBody.course}', '${postBody.score}')
+    VALUES ($1, $2, $3)
     RETURNING *;`;
+  const values = [postBody.name, postBody.course, postBody.score];
   if (!postBody.name || !postBody.course || !postBody.score) {
     res.status(400).json({
       error: 'Must have a name, course and score field'
     });
   } else {
     if (postBody.score > 0 && postBody.score <= 100 && Number.isInteger(Number(postBody.score))) {
-      db.query(sql)
+      db.query(sql, values)
         .then(result => {
           res.status(201).json(result.rows);
         })
@@ -76,13 +77,14 @@ app.put('/api/grades/:gradeId', (req, res) => {
   }
   const sql = `
   UPDATE "grades"
-  SET "name" = '${putBody.name}',
-      "course" = '${putBody.course}',
-      "score" = '${putBody.score}'
-  WHERE "gradeId" = '${gradeId}'
+  SET "name" = $1,
+      "course" = $2,
+      "score" = $3
+  WHERE "gradeId" = $4
   RETURNING *;
   `;
-  db.query(sql)
+  const values = [putBody.name, putBody.course, putBody.score, gradeId];
+  db.query(sql, values)
     .then(result => {
       const gradesArray = result.rows[0];
       if (!gradesArray) {
@@ -111,9 +113,10 @@ app.delete('/api/grades/:gradeId', (req, res) => {
   }
   const sql = `
   DELETE FROM "grades"
-  WHERE "gradeId" = ${gradeId}
+  WHERE "gradeId" = $1
   RETURNING *`;
-  db.query(sql)
+  const values = [gradeId];
+  db.query(sql, values)
     .then(result => {
       const gradesArray = result.rows[0];
       if (!gradesArray) {
