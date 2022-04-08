@@ -42,7 +42,7 @@ app.post('/api/grades', (req, res) => {
     VALUES ($1, $2, $3)
     RETURNING *;`;
   const values = [postBody.name, postBody.course, postBody.score];
-  if (!postBody.name || !postBody.course || !postBody.score) {
+  if (!postBody.name || !postBody.course) {
     res.status(400).json({
       error: 'Must have a name, course and score field'
     });
