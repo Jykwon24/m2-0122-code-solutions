@@ -47,7 +47,7 @@ app.post('/api/grades', (req, res) => {
       error: 'Must have a name, course and score field'
     });
   } else {
-    if (postBody.score > 0 && postBody.score <= 100 && Number.isInteger(Number(postBody.score))) {
+    if (postBody.score >= 0 && postBody.score <= 100 && Number.isInteger(Number(postBody.score))) {
       db.query(sql, values)
         .then(result => {
           res.status(201).json(result.rows);
@@ -124,7 +124,7 @@ app.delete('/api/grades/:gradeId', (req, res) => {
           error: `Cannot find grade with gradeId ${gradeId}`
         });
       } else {
-        res.status(200).json(result.rows);
+        res.sendStatus(204);
       }
     })
     .catch(err => {
