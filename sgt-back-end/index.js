@@ -70,9 +70,9 @@ app.put('/api/grades/:gradeId', (req, res) => {
   const gradeId = Number(req.params.gradeId);
   const putBody = req.body;
   const scoreNumber = Number(req.body.score);
-  if (!Number.isInteger(gradeId) || gradeId <= 0 || !putBody.name || !putBody.course || !Number.isInteger(scoreNumber)) {
+  if (!Number.isInteger(gradeId) || gradeId <= 0 || !putBody.name || !putBody.course || !Number.isInteger(scoreNumber) || scoreNumber < 0 || scoreNumber > 100) {
     res.status(400).json({
-      error: 'Invalid gradeId or missing name, course or score field'
+      error: 'Invalid gradeId, name, course or score field'
     });
     return;
   }
